@@ -3,32 +3,34 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Car, Menu } from "lucide-react"
 import { Link } from "react-router-dom"
+import Logo from "../assets/DriveOn.png"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  // Dummy auth state — replace with real auth logic
+  const isSignedIn = false
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <Car className="h-6 w-6" />
-          <span className="text-xl font-bold">DriveOn</span>
+          <img src={Logo} alt="DriveOn Logo" className="h-20 w-50" />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6 ml-auto">
           <Link to="/" className="text-sm font-medium hover:text-primary">
             Home
           </Link>
           <Link to="/vehicles" className="text-sm font-medium hover:text-primary">
             Vehicles
           </Link>
-          <Link to="/login" className="text-sm font-medium hover:text-primary">
-            Login
-          </Link>
-          <Button asChild>
-            <Link to="/signup">Sign Up</Link>
-          </Button>
+          {!isSignedIn && (
+            <Button asChild>
+              <Link to="/signup">Sign Up</Link>
+            </Button>
+          )}
         </nav>
 
         {/* Mobile Navigation */}
@@ -41,7 +43,11 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent side="right">
             <div className="flex flex-col gap-4 mt-8">
-              <Link to="/" className="text-lg font-medium hover:text-primary" onClick={() => setIsMenuOpen(false)}>
+              <Link
+                to="/"
+                className="text-lg font-medium hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Home
               </Link>
               <Link
@@ -51,14 +57,13 @@ export default function Navbar() {
               >
                 Vehicles
               </Link>
-              <Link to="/login" className="text-lg font-medium hover:text-primary" onClick={() => setIsMenuOpen(false)}>
-                Login
-              </Link>
-              <Button asChild>
-                <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
-                  Sign Up
-                </Link>
-              </Button>
+              {!isSignedIn && (
+                <Button asChild>
+                  <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                    Sign Up
+                  </Link>
+                </Button>
+              )}
             </div>
           </SheetContent>
         </Sheet>
