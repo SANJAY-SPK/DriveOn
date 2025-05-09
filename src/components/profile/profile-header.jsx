@@ -1,35 +1,38 @@
 import React, { useState } from "react"
-import { Camera, Edit } from "lucide-react"
+import { Camera, Edit, LogOut } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 
-// Mock user data
 const userData = {
   id: "USR12345",
   name: "Sanjay Sivakumar",
   email: "sanjaysivakumar2261@gmail.com",
   phone: "+91 9876543210",
-  memberSince: "Apirl 15, 2025",
+  memberSince: "April 15, 2025",
   profileImage: "/placeholder.svg",
 }
 
 export default function ProfileHeader() {
   const [isUploading, setIsUploading] = useState(false)
   const [profileImage, setProfileImage] = useState(userData.profileImage)
+  const navigate = useNavigate()
 
   const handleImageUpload = (e) => {
     if (e.target.files && e.target.files[0]) {
       setIsUploading(true)
-
-      // Simulate upload delay
       setTimeout(() => {
         setIsUploading(false)
-        // In a real app, you would upload the file and set the real image URL
         setProfileImage("/placeholder.svg")
       }, 1500)
     }
+  }
+
+  const handleSignOut = () => {
+    // Clear user session here if needed
+    navigate("/login")
   }
 
   return (
@@ -46,7 +49,11 @@ export default function ProfileHeader() {
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="icon" variant="secondary" className="absolute bottom-0 right-0 rounded-full h-10 w-10">
+              <Button
+                size="icon"
+                variant="secondary"
+                className="absolute bottom-0 right-0 rounded-full h-10 w-10"
+              >
                 <Camera className="h-5 w-5" />
               </Button>
             </DialogTrigger>
@@ -66,10 +73,18 @@ export default function ProfileHeader() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="picture">Upload new picture</Label>
-                  <Input id="picture" type="file" accept="image/*" onChange={handleImageUpload} />
+                  <Input
+                    id="picture"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                  />
                 </div>
                 <div className="flex justify-end">
-                  <Button className="bg-rose-600 hover:bg-rose-700" disabled={isUploading}>
+                  <Button
+                    className="bg-rose-600 hover:bg-rose-700"
+                    disabled={isUploading}
+                  >
                     {isUploading ? "Uploading..." : "Save"}
                   </Button>
                 </div>
@@ -85,7 +100,11 @@ export default function ProfileHeader() {
               <p className="text-gray-600">{userData.email}</p>
               <p className="text-gray-600">{userData.phone}</p>
             </div>
-            <Button variant="outline" size="sm" className="mt-2 md:mt-0 flex items-center gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="mt-2 md:mt-0 flex items-center gap-1"
+            >
               <Edit className="h-4 w-4" /> Edit Profile
             </Button>
           </div>
@@ -108,8 +127,25 @@ export default function ProfileHeader() {
               </p>
             </div>
           </div>
+          <div className="pt-4  w-full">
+            <div className="flex flex-col sm:flex-row gap-2">
+              <Button variant="outline" className="flex-1">
+                Download My Data
+              </Button>
+              <Button variant="outline" className="flex-1">
+                Delete Account
+              </Button>
+              <Button
+                variant="outline"
+                className="flex-1 text-red-600 hover:text-red-700 hover:bg-red-50"
+                onClick={handleSignOut}
+              >
+                <LogOut className="mr-2 h-4 w-4" /> Sign Out
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
