@@ -5,6 +5,7 @@ import BookingPage from "./pages/BookingPage"
 import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
 import AdminDashboard from "./pages/AdminDashboard"
+import UserPage from "./pages/UserPage"
 import { ThemeProvider } from "./components/theme-provider"
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/booking/:id" element={<BookingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
+          <Route path="/user" element={<UserPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Router>

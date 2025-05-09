@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Car, Menu } from "lucide-react"
+import { Car, Menu, User } from "lucide-react"
 import { Link } from "react-router-dom"
 import Logo from "../assets/DriveOn.png"
 
@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Dummy auth state — replace with real auth logic
-  const isSignedIn = false
+  const isSignedIn = true // simulate user signed in
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -26,7 +26,11 @@ export default function Navbar() {
           <Link to="/vehicles" className="text-sm font-medium hover:text-primary">
             Vehicles
           </Link>
-          {!isSignedIn && (
+          {isSignedIn ? (
+            <Link to="/user" className="text-sm font-medium hover:text-primary">
+              <User className="h-5 w-5" />
+            </Link>
+          ) : (
             <Button asChild>
               <Link to="/signup">Sign Up</Link>
             </Button>
@@ -43,21 +47,17 @@ export default function Navbar() {
           </SheetTrigger>
           <SheetContent side="right">
             <div className="flex flex-col gap-4 mt-8">
-              <Link
-                to="/"
-                className="text-lg font-medium hover:text-primary"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">
                 Home
               </Link>
-              <Link
-                to="/vehicles"
-                className="text-lg font-medium hover:text-primary"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link to="/vehicles" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary">
                 Vehicles
               </Link>
-              {!isSignedIn && (
+              {isSignedIn ? (
+                <Link to="/user" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium hover:text-primary flex items-center gap-2">
+                  <User className="h-5 w-5" /> Profile
+                </Link>
+              ) : (
                 <Button asChild>
                   <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
                     Sign Up
