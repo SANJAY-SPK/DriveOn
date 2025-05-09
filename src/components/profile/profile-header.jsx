@@ -8,10 +8,10 @@ import { Input } from "@/components/ui/input"
 // Mock user data
 const userData = {
   id: "USR12345",
-  name: "Alex Johnson",
-  email: "alex.johnson@example.com",
-  phone: "+1 (555) 123-4567",
-  memberSince: "January 15, 2023",
+  name: "Sanjay Sivakumar",
+  email: "sanjaysivakumar2261@gmail.com",
+  phone: "+91 9876543210",
+  memberSince: "Apirl 15, 2025",
   profileImage: "/placeholder.svg",
 }
 
