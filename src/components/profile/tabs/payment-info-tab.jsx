@@ -42,35 +42,35 @@ const paymentData = {
   transactions: [
     {
       id: "txn_1",
-      date: new Date(2023, 4, 20),
+      date: new Date(2025, 4, 20),
       amount: 750,
       description: "Booking #B1001 - Tesla Model S",
       status: "completed",
     },
     {
       id: "txn_2",
-      date: new Date(2023, 4, 15),
+      date: new Date(2025, 4, 15),
       amount: 600,
       description: "Booking #B1000 - BMW X5",
       status: "completed",
     },
     {
       id: "txn_3",
-      date: new Date(2023, 3, 10),
+      date: new Date(2025, 3, 10),
       amount: 1000,
       description: "Booking #B999 - Mercedes S-Class",
       status: "completed",
     },
     {
       id: "txn_4",
-      date: new Date(2023, 2, 5),
+      date: new Date(2025, 2, 5),
       amount: 210,
       description: "Booking #B998 - Toyota Corolla",
       status: "completed",
     },
     {
       id: "txn_5",
-      date: new Date(2023, 1, 20),
+      date: new Date(2025, 1, 20),
       amount: -700,
       description: "Refund for Booking #B997 - Audi Q7",
       status: "refunded",
@@ -395,7 +395,7 @@ export function PaymentInfoTab() {
                       <TableCell>{format(transaction.date, "MMM d, yyyy")}</TableCell>
                       <TableCell>{transaction.description}</TableCell>
                       <TableCell className={transaction.amount < 0 ? "text-red-600" : ""}>
-                        ${Math.abs(transaction.amount).toFixed(2)}
+                        ₹{Math.abs(transaction.amount).toFixed(2)}
                       </TableCell>
                       <TableCell>
                         <span

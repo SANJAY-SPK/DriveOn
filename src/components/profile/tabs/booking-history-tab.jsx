@@ -8,7 +8,7 @@ const bookings = {
     {
       id: "B1001",
       vehicle: {
-        name: "Tesla Model S",
+        name: "Maruti Suzuki",
         type: "Electric",
         image: "/placeholder.svg?height=200&width=300",
       },
@@ -216,7 +216,7 @@ export function BookingHistoryTab() {
                               </div>
                             </td>
                             <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">{booking.location}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${booking.totalPrice}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{booking.totalPrice}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                 Confirmed
@@ -299,7 +299,7 @@ export function BookingHistoryTab() {
                               </div>
                             </td>
                             <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">{booking.location}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${booking.totalPrice}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{booking.totalPrice}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                 Completed
@@ -382,7 +382,7 @@ export function BookingHistoryTab() {
                               </div>
                             </td>
                             <td className="hidden md:table-cell px-6 py-4 whitespace-nowrap text-sm text-gray-500">{booking.location}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${booking.totalPrice}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{booking.totalPrice}</td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                                 Cancelled
@@ -465,7 +465,7 @@ export function BookingHistoryTab() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">Total Price</p>
-                        <p className="font-medium">${selectedBooking.totalPrice}</p>
+                        <p className="font-medium">₹{selectedBooking.totalPrice}</p>
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">Pickup Date</p>
