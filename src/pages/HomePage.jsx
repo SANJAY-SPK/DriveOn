@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Car, Calendar, Shield } from "lucide-react"
 import { Link } from "react-router-dom"
+import CountUp from "react-countup"
 import Navbar from "@/components/Navbar"
 import FeaturedVehicles from "@/components/FeaturedVehicles"
 import Footer from "@/components/Footer"
@@ -53,25 +54,25 @@ export default function HomePage() {
       </section>
 
       <div className="container mx-auto px-4">
-          <div className="bg-white p-6 rounded-lg shadow-md grid md:grid-cols-4 gap-4">
-            <input
-              type="text"
-              placeholder="Pickup Location"
-              className="p-3 rounded-md border border-gray-300"
-            />
-            <input
-              type="date"
-              className="p-3 rounded-md border border-gray-300"
-            />
-            <input
-              type="date"
-              className="p-3 rounded-md border border-gray-300"
-            />
-            <Button className="w-full bg-primary hover:bg-primary/90 text-white">
-              Search Now
-            </Button>
-          </div>
+        <div className="bg-white p-6 rounded-lg shadow-md grid md:grid-cols-4 gap-4">
+          <input
+            type="text"
+            placeholder="Pickup Location"
+            className="p-3 rounded-md border border-gray-300"
+          />
+          <input
+            type="date"
+            className="p-3 rounded-md border border-gray-300"
+          />
+          <input
+            type="date"
+            className="p-3 rounded-md border border-gray-300"
+          />
+          <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+            Search Now
+          </Button>
         </div>
+      </div>
 
       {/* Features Section */}
       <section className="py-16 bg-white">
@@ -81,56 +82,64 @@ export default function HomePage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Car className="h-8 w-8 text-primary" />
+            {[
+              {
+                icon: Car,
+                title: "Premium Vehicles",
+                desc: "Choose from our fleet of well-maintained, premium vehicles for any occasion.",
+              },
+              {
+                icon: Calendar,
+                title: "Flexible Booking",
+                desc: "Easy online booking with flexible pickup and return options to fit your schedule.",
+              },
+              {
+                icon: Shield,
+                title: "Full Insurance",
+                desc: "Drive with peace of mind with our comprehensive insurance coverage included.",
+              },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <div
+                key={i}
+                className="hover-card bg-white p-6 rounded-xl shadow-md text-center border border-gray-100 group"
+              >
+                <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors duration-300">
+                  <Icon className="h-8 w-8 text-primary transition-transform duration-300 group-hover:rotate-6" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-gray-600">{desc}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Premium Vehicles</h3>
-              <p className="text-gray-600">
-                Choose from our fleet of well-maintained, premium vehicles for
-                any occasion.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Calendar className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Flexible Booking</h3>
-              <p className="text-gray-600">
-                Easy online booking with flexible pickup and return options to
-                fit your schedule.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Full Insurance</h3>
-              <p className="text-gray-600">
-                Drive with peace of mind with our comprehensive insurance
-                coverage included.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Statistics Section */}
       <section className="py-12 bg-primary text-white">
         <div className="container mx-auto px-4 text-center">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {/* Rentals Completed */}
             <div>
-              <h3 className="text-4xl font-bold">10,000+</h3>
+              <h3 className="text-4xl font-bold">
+                <CountUp end={10000} duration={3} separator="," />+
+              </h3>
               <p className="mt-2 text-lg">Rentals Completed</p>
             </div>
+
+            {/* Customer Satisfaction */}
             <div>
-              <h3 className="text-4xl font-bold">98%</h3>
+              <h3 className="text-4xl font-bold">
+                <CountUp end={98} duration={2.5} />%
+              </h3>
               <p className="mt-2 text-lg">Customer Satisfaction</p>
             </div>
+
+            {/* Support Available */}
             <div>
-              <h3 className="text-4xl font-bold">24/7</h3>
+              <h3 className="text-4xl font-bold">
+                <CountUp start={0} end={24} duration={2} />/
+                <CountUp end={7} duration={2} />
+              </h3>
               <p className="mt-2 text-lg">Support Available</p>
             </div>
           </div>
@@ -143,45 +152,37 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Calendar className="h-8 w-8 text-primary" />
+            {[
+              {
+                icon: Calendar,
+                title: "1. Book Online",
+                desc: "Choose your vehicle, select dates, and book your ride online in just a few clicks.",
+              },
+              {
+                icon: Car,
+                title: "2. Pick Up or Get Delivered",
+                desc: "Collect your car from our location or get it delivered to your doorstep.",
+              },
+              {
+                icon: Shield,
+                title: "3. Drive & Enjoy",
+                desc: "Hit the road with confidence and enjoy your journey with our fully insured cars.",
+              },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <div
+                key={i}
+                className="hover-card bg-white p-6 rounded-xl shadow-md text-center border border-gray-100"
+              >
+                <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4 transition-colors duration-300">
+                  <Icon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{title}</h3>
+                <p className="text-gray-600">{desc}</p>
               </div>
-              <h3 className="text-xl font-semibold mb-2">1. Book Online</h3>
-              <p className="text-gray-600">
-                Choose your vehicle, select dates, and book your ride online in
-                just a few clicks.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Car className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">
-                2. Pick Up or Get Delivered
-              </h3>
-              <p className="text-gray-600">
-                Collect your car from our location or get it delivered to your
-                doorstep.
-              </p>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Shield className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="text-xl font-semibold mb-2">3. Drive & Enjoy</h3>
-              <p className="text-gray-600">
-                Hit the road with confidence and enjoy your journey with our
-                fully insured cars.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-
-      
 
       {/* Featured Vehicles Section */}
       <section className="py-16">

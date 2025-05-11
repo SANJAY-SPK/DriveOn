@@ -89,3 +89,17 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .hover-card {
+    @apply transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-primary/5;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 6s infinite ease-in-out;
+}

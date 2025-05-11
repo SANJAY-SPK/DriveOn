@@ -71,7 +71,7 @@ export default function AdminDashboard() {
     pricePerDay: "",
     seats: "",
     transmission: "automatic",
-    image: "/placeholder.svg?height=200&width=300",
+    image: "",
   })
 
   const handleAddVehicle = () => {
@@ -90,7 +90,7 @@ export default function AdminDashboard() {
       pricePerDay: "",
       seats: "",
       transmission: "automatic",
-      image: "/placeholder.svg?height=200&width=300",
+      image: "",
     })
   }
 
@@ -192,6 +192,14 @@ export default function AdminDashboard() {
                             onChange={(e) => setNewVehicle({ ...newVehicle, seats: e.target.value })}
                           />
                         </div>
+                        <div>
+                          <Label htmlFor="image">Image URL</Label>
+                          <Input
+                            id="image"
+                            value={newVehicle.image}
+                            onChange={(e) => setNewVehicle({ ...newVehicle, image: e.target.value })}
+                          />
+                        </div>
                         <div className="grid gap-2">
                           <Label htmlFor="transmission">Transmission</Label>
                           <Select
@@ -248,7 +256,7 @@ export default function AdminDashboard() {
                                 {vehicle.type}
                               </Badge>
                             </TableCell>
-                            <TableCell>${vehicle.pricePerDay}</TableCell>
+                            <TableCell>₹{vehicle.pricePerDay}</TableCell>
                             <TableCell>{vehicle.seats}</TableCell>
                             <TableCell>
                               <div className="flex space-x-2">
