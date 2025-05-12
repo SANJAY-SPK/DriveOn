@@ -1,5 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
 import ProfileHeader from "@/components/profile/profile-header"

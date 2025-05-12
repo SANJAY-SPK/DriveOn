@@ -10,6 +10,9 @@ import TestimonialCarousel from "@/components/TestimonialCarousel"
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="bg-yellow-100 text-yellow-800 p-4 text-center font-bold">
+      ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
+      </div>
       <Navbar />
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">

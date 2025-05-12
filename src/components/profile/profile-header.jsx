@@ -8,11 +8,11 @@ import { Input } from "@/components/ui/input"
 
 const userData = {
   id: "USR12345",
-  name: "Sanjay Sivakumar",
-  email: "sanjaysivakumar2261@gmail.com",
-  phone: "+91 9876543210",
-  memberSince: "April 15, 2025",
-  profileImage: "/placeholder.svg",
+  name: "",
+  email: "",
+  phone: "",
+  memberSince: "",
+  profileImage: "",
 }
 
 export default function ProfileHeader() {

@@ -12,22 +12,22 @@ import { cn } from "@/lib/utils"
 
 // Mock user personal data
 const personalData = {
-  fullName: "Sanjay Sivakumar",
-  email: "sanjaysivakumar2261.com",
-  phone: "+91 9876543210",
+  fullName: "",
+  email: "",
+  phone: "",
   dateOfBirth: new Date(2003, 9, 12),
-  gender: "male",
+  gender: "",
   emergencyContact: {
-    name: "Sivakumar",
-    relationship: "Father",
-    phone: "+91 9876543210",
+    name: "",
+    relationship: "",
+    phone: "",
   },
   address: {
-    street: "24 A EA Street",
-    city: "Coimbatore",
-    state: "TN",
-    zipCode: "641201",
-    country: "India",
+    street: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
   },
 }
 

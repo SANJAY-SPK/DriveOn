@@ -55,6 +55,9 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <div className="bg-yellow-100 text-yellow-800 p-4 text-center font-bold">
+      ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
+      </div>
       <Navbar />
 
       <main className="flex-1 flex items-center justify-center py-12">

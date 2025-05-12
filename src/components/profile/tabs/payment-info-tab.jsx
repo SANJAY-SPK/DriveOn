@@ -210,6 +210,9 @@ export function PaymentInfoTab() {
 
   return (
     <div className="space-y-6">
+      <div className="text-sm text-gray-500 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-md">
+      ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
+      </div>
       <Card>
         <CardHeader>
           <div className="flex justify-between items-center">
