@@ -53,7 +53,7 @@ export default function TestimonialCarousel() {
             animate={{ x: ["0%", "-100%"] }}
             transition={{
               repeat: Infinity,
-              duration: 30,
+              duration: 20,
               ease: "linear",
               repeatType: "loop",
             }}
