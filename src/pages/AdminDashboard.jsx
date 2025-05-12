@@ -65,6 +65,7 @@ export default function AdminDashboard() {
   const [vehiclesList, setVehiclesList] = useState(vehicles)
   const [bookingsList, setBookingsList] = useState(bookings)
   const [isAddVehicleOpen, setIsAddVehicleOpen] = useState(false)
+  const [isUploading, setIsUploading] = useState(false)
   const [newVehicle, setNewVehicle] = useState({
     name: "",
     type: "suv",
@@ -111,6 +112,17 @@ export default function AdminDashboard() {
     }
   }
 
+  
+  const handleImageUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setIsUploading(true)
+      setTimeout(() => {
+        setIsUploading(false)
+        setProfileImage("/placeholder.svg")
+      }, 1500)
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -131,93 +143,148 @@ export default function AdminDashboard() {
             <TabsContent value="vehicles">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                  <div>
+                  <div className="flex flex-col">
                     <CardTitle>Vehicles</CardTitle>
-                    <CardDescription>Manage your vehicle inventory</CardDescription>
-                  </div>
-                  <Dialog open={isAddVehicleOpen} onOpenChange={setIsAddVehicleOpen}>
+                    <CardDescription>
+                      Manage your vehicle inventory
+                    </CardDescription>
+                  </div >
+                  <Dialog
+                    open={isAddVehicleOpen}
+                    onOpenChange={setIsAddVehicleOpen}
+                  >
                     <DialogTrigger asChild>
                       <Button>
                         <Plus className="mr-2 h-4 w-4" /> Add Vehicle
                       </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="max-h-[90vh] overflow-hidden grid gap-4 py-4">
                       <DialogHeader>
                         <DialogTitle>Add New Vehicle</DialogTitle>
                         <DialogDescription>
-                          Fill in the details to add a new vehicle to your inventory.
+                          Fill in the details to add a new vehicle to your
+                          inventory.
                         </DialogDescription>
                       </DialogHeader>
-                      <div className="grid gap-4 py-4">
-                        <div className="grid gap-2">
-                          <Label htmlFor="name">Vehicle Name</Label>
-                          <Input
-                            id="name"
-                            value={newVehicle.name}
-                            onChange={(e) => setNewVehicle({ ...newVehicle, name: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="type">Vehicle Type</Label>
-                          <Select
-                            value={newVehicle.type}
-                            onValueChange={(value) => setNewVehicle({ ...newVehicle, type: value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="suv">SUV</SelectItem>
-                              <SelectItem value="luxury">Luxury</SelectItem>
-                              <SelectItem value="economy">Economy</SelectItem>
-                              <SelectItem value="electric">Electric</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="price">Price Per Day ( ₹)</Label>
-                          <Input
-                            id="price"
-                            type="number"
-                            value={newVehicle.pricePerDay}
-                            onChange={(e) => setNewVehicle({ ...newVehicle, pricePerDay: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="seats">Number of Seats</Label>
-                          <Input
-                            id="seats"
-                            type="number"
-                            value={newVehicle.seats}
-                            onChange={(e) => setNewVehicle({ ...newVehicle, seats: e.target.value })}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="image">Image URL</Label>
-                          <Input
-                            id="image"
-                            value={newVehicle.image}
-                            onChange={(e) => setNewVehicle({ ...newVehicle, image: e.target.value })}
-                          />
-                        </div>
-                        <div className="grid gap-2">
-                          <Label htmlFor="transmission">Transmission</Label>
-                          <Select
-                            value={newVehicle.transmission}
-                            onValueChange={(value) => setNewVehicle({ ...newVehicle, transmission: value })}
-                          >
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select transmission" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="automatic">Automatic</SelectItem>
-                              <SelectItem value="manual">Manual</SelectItem>
-                            </SelectContent>
-                          </Select>
+
+                      {/* Scrollable Form Container */}
+                      <div className="overflow-y-auto max-h-[60vh] pr-2">
+                        <div className="grid gap-4 py-4">
+                          <div className="grid gap-2">
+                            <Label htmlFor="name">Vehicle Name</Label>
+                            <Input
+                              id="name"
+                              value={newVehicle.name}
+                              onChange={(e) =>
+                                setNewVehicle({
+                                  ...newVehicle,
+                                  name: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+
+                          <div className="grid gap-2">
+                            <Label htmlFor="type">Vehicle Type</Label>
+                            <Select
+                              value={newVehicle.type}
+                              onValueChange={(value) =>
+                                setNewVehicle({ ...newVehicle, type: value })
+                              }
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="suv">SUV</SelectItem>
+                                <SelectItem value="luxury">Luxury</SelectItem>
+                                <SelectItem value="economy">Economy</SelectItem>
+                                <SelectItem value="electric">
+                                  Electric
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="grid gap-2">
+                            <Label htmlFor="price">Price Per Day (₹)</Label>
+                            <Input
+                              id="price"
+                              type="number"
+                              value={newVehicle.pricePerDay}
+                              onChange={(e) =>
+                                setNewVehicle({
+                                  ...newVehicle,
+                                  pricePerDay: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+
+                          <div className="grid gap-2">
+                            <Label htmlFor="seats">Number of Seats</Label>
+                            <Input
+                              id="seats"
+                              type="number"
+                              value={newVehicle.seats}
+                              onChange={(e) =>
+                                setNewVehicle({
+                                  ...newVehicle,
+                                  seats: e.target.value,
+                                })
+                              }
+                            />
+                          </div>
+
+                          <div className="grid gap-2">
+                            <Label htmlFor="transmission">Transmission</Label>
+                            <Select
+                              value={newVehicle.transmission}
+                              onValueChange={(value) =>
+                                setNewVehicle({
+                                  ...newVehicle,
+                                  transmission: value,
+                                })
+                              }
+                            >
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select transmission" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="automatic">
+                                  Automatic
+                                </SelectItem>
+                                <SelectItem value="manual">Manual</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+
+                          <div className="space-y-2">
+                            <Label htmlFor="picture">Upload new picture</Label>
+                            <Input
+                              id="picture"
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageUpload}
+                            />
+                          </div>
+
+                          <div className="flex justify-end">
+                            <Button
+                              className="bg-rose-600 hover:bg-rose-700"
+                              disabled={isUploading}
+                            >
+                              {isUploading ? "Uploading..." : "Save"}
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                      <DialogFooter>
-                        <Button variant="outline" onClick={() => setIsAddVehicleOpen(false)}>
+
+                      <DialogFooter className="mt-4">
+                        <Button
+                          variant="outline"
+                          onClick={() => setIsAddVehicleOpen(false)}
+                        >
                           Cancel
                         </Button>
                         <Button onClick={handleAddVehicle}>Add Vehicle</Button>
@@ -250,7 +317,9 @@ export default function AdminDashboard() {
                                 />
                               </div>
                             </TableCell>
-                            <TableCell className="font-medium">{vehicle.name}</TableCell>
+                            <TableCell className="font-medium">
+                              {vehicle.name}
+                            </TableCell>
                             <TableCell>
                               <Badge variant="outline" className="capitalize">
                                 {vehicle.type}
@@ -267,7 +336,9 @@ export default function AdminDashboard() {
                                   variant="outline"
                                   size="icon"
                                   className="text-red-500"
-                                  onClick={() => handleDeleteVehicle(vehicle.id)}
+                                  onClick={() =>
+                                    handleDeleteVehicle(vehicle.id)
+                                  }
                                 >
                                   <Trash className="h-4 w-4" />
                                 </Button>
@@ -307,15 +378,22 @@ export default function AdminDashboard() {
                           <TableRow key={booking.id}>
                             <TableCell>
                               <div>
-                                <p className="font-medium">{booking.user.name}</p>
-                                <p className="text-sm text-gray-500">{booking.user.email}</p>
+                                <p className="font-medium">
+                                  {booking.user.name}
+                                </p>
+                                <p className="text-sm text-gray-500">
+                                  {booking.user.email}
+                                </p>
                               </div>
                             </TableCell>
                             <TableCell>
                               <div className="flex items-center space-x-3">
                                 <div className="relative h-10 w-16 rounded overflow-hidden">
                                   <img
-                                    src={booking.vehicle.image || "/placeholder.svg"}
+                                    src={
+                                      booking.vehicle.image ||
+                                      "/placeholder.svg"
+                                    }
                                     alt={booking.vehicle.name}
                                     className="w-full h-full object-cover"
                                   />
@@ -326,7 +404,13 @@ export default function AdminDashboard() {
                             <TableCell>{booking.startDate}</TableCell>
                             <TableCell>{booking.endDate}</TableCell>
                             <TableCell>
-                              <Badge className={`capitalize ${getStatusColor(booking.status)}`}>{booking.status}</Badge>
+                              <Badge
+                                className={`capitalize ${getStatusColor(
+                                  booking.status
+                                )}`}
+                              >
+                                {booking.status}
+                              </Badge>
                             </TableCell>
                             <TableCell>
                               <div className="flex space-x-2">
@@ -349,5 +433,5 @@ export default function AdminDashboard() {
 
       <Footer />
     </div>
-  )
+  );
 }

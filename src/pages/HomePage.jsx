@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Car, Calendar, Shield } from "lucide-react"
+import { ArrowRight, Car, Calendar, Shield, Handshake } from "lucide-react"
 import { Link } from "react-router-dom"
 import CountUp from "react-countup"
 import Navbar from "@/components/Navbar"
@@ -10,9 +10,6 @@ import TestimonialCarousel from "@/components/TestimonialCarousel"
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
-      <div className="bg-yellow-100 text-yellow-800 p-4 text-center font-bold">
-      ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
-      </div>
       <Navbar />
       {/* Hero Section */}
       <section className="relative h-[600px] flex items-center">
@@ -58,20 +55,36 @@ export default function HomePage() {
 
       <div className="container mx-auto px-4">
         <div className="bg-white p-6 rounded-lg shadow-md grid md:grid-cols-4 gap-4">
-          <input
-            type="text"
-            placeholder="Pickup Location"
-            className="p-3 rounded-md border border-gray-300"
-          />
+          {/* Car Type Dropdown */}
+          <select className="p-3 rounded-md border border-gray-300">
+            <option value="">Select Car Type</option>
+            <option value="suv">SUV</option>
+            <option value="economy">Economy</option>
+            <option value="luxury">Luxury</option>
+            <option value="electric">Electric</option>
+          </select>
+
+          {/* With/Without Driver Dropdown */}
+          <select className="p-3 rounded-md border border-gray-300">
+            <option value="">With or Without Driver</option>
+            <option value="with-driver">With Driver</option>
+            <option value="self-drive">Self Drive</option>
+          </select>
+
+          {/* Pickup Date */}
           <input
             type="date"
             className="p-3 rounded-md border border-gray-300"
           />
+
+          {/* Return Date */}
           <input
             type="date"
             className="p-3 rounded-md border border-gray-300"
           />
-          <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+
+          {/* Search Button (spans all 4 columns on small screens) */}
+          <Button className="w-full bg-primary hover:bg-primary/90 text-white md:col-span-4">
             Search Now
           </Button>
         </div>
@@ -167,7 +180,7 @@ export default function HomePage() {
                 desc: "Collect your car from our location or get it delivered to your doorstep.",
               },
               {
-                icon: Shield,
+                icon: Handshake,
                 title: "3. Drive & Enjoy",
                 desc: "Hit the road with confidence and enjoy your journey with our fully insured cars.",
               },

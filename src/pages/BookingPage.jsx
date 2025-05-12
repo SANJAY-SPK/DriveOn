@@ -112,7 +112,7 @@ export default function BookingPage() {
                     <span className="text-gray-500">Total Days:</span> {calculateTotalDays()}
                   </p>
                   <p>
-                    <span className="text-gray-500">Total Price:</span> ${calculateTotalPrice()}
+                    <span className="text-gray-500">Total Price:</span> ₹{calculateTotalPrice()}
                   </p>
                 </div>
 

@@ -17,6 +17,7 @@ const personalData = {
   phone: "",
   dateOfBirth: new Date(2003, 9, 12),
   gender: "",
+  licenseImage: "",
   emergencyContact: {
     name: "",
     relationship: "",
@@ -35,6 +36,18 @@ export function PersonalInfoTab() {
   const [formData, setFormData] = useState(personalData)
   const [isEditing, setIsEditing] = useState(false)
   const [date, setDate] = useState(personalData.dateOfBirth)
+  const [isUploading, setIsUploading] = useState(false)
+  const [licenseImage, setLicenseImage] = useState("/placeholder.svg")
+
+  const handleImageUpload = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setIsUploading(true)
+      setTimeout(() => {
+        setIsUploading(false)
+        setLicenseImage("/placeholder.svg")
+      }, 1500)
+    }
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target
@@ -68,7 +81,9 @@ export function PersonalInfoTab() {
           <div className="flex justify-between items-center">
             <div>
               <CardTitle>Personal Information</CardTitle>
-              <CardDescription>Manage your personal details and contact information</CardDescription>
+              <CardDescription>
+                Manage your personal details and contact information
+              </CardDescription>
             </div>
             <Button
               variant={isEditing ? "default" : "outline"}
@@ -121,7 +136,10 @@ export function PersonalInfoTab() {
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    className={cn("w-full justify-start text-left font-normal", !date && "text-muted-foreground")}
+                    className={cn(
+                      "w-full justify-start text-left font-normal",
+                      !date && "text-muted-foreground"
+                    )}
                     disabled={!isEditing}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
@@ -129,7 +147,13 @@ export function PersonalInfoTab() {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
-                  <Calendar mode="single" selected={date} onSelect={setDate} initialFocus disabled={!isEditing} />
+                  <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                    disabled={!isEditing}
+                  />
                 </PopoverContent>
               </Popover>
             </div>
@@ -139,7 +163,9 @@ export function PersonalInfoTab() {
               <Select
                 disabled={!isEditing}
                 defaultValue={formData.gender}
-                onValueChange={(value) => setFormData({ ...formData, gender: value })}
+                onValueChange={(value) =>
+                  setFormData({ ...formData, gender: value })
+                }
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select gender" />
@@ -148,10 +174,30 @@ export function PersonalInfoTab() {
                   <SelectItem value="male">Male</SelectItem>
                   <SelectItem value="female">Female</SelectItem>
                   <SelectItem value="other">Other</SelectItem>
-                  <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                  <SelectItem value="prefer-not-to-say">
+                    Prefer not to say
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="picture">Add License Image</Label>
+            <Input
+              id="picture"
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
+          </div>
+          <div className="flex justify-end">
+            <Button
+              className="bg-black hover:bg-rose-700"
+              disabled={isUploading}
+            >
+              {isUploading ? "Uploading..." : "Save"}
+            </Button>
           </div>
 
           <div className="pt-4 border-t">
@@ -169,7 +215,9 @@ export function PersonalInfoTab() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="emergencyContact.relationship">Relationship</Label>
+                <Label htmlFor="emergencyContact.relationship">
+                  Relationship
+                </Label>
                 <Input
                   id="emergencyContact.relationship"
                   name="emergencyContact.relationship"
@@ -254,12 +302,15 @@ export function PersonalInfoTab() {
         </CardContent>
         {isEditing && (
           <CardFooter className="flex justify-end">
-            <Button onClick={handleSave} className="bg-rose-600 hover:bg-rose-700">
+            <Button
+              onClick={handleSave}
+              className="bg-rose-600 hover:bg-rose-700"
+            >
               <Save className="mr-2 h-4 w-4" /> Save Changes
             </Button>
           </CardFooter>
         )}
       </Card>
     </div>
-  )
+  );
 }

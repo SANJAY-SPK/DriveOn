@@ -26,6 +26,11 @@ export default function Navbar() {
           <Link to="/vehicles" className="text-sm font-medium hover:text-primary">
             Vehicles
           </Link>
+          <Link to="/contact" className="text-sm font-medium hover:text-primary">
+            Contact
+          </Link>
+          
+
           {isSignedIn ? (
             <Link to="/user" className="text-sm font-medium hover:text-primary">
               <User className="h-5 w-5" />

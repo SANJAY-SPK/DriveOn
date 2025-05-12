@@ -7,6 +7,7 @@ import SignupPage from "./pages/SignupPage"
 import AdminDashboard from "./pages/AdminDashboard"
 import UserPage from "./pages/UserPage"
 import { ThemeProvider } from "./components/theme-provider"
+import ContactUsPage from "./pages/ContactUsPage"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/contact" element={<ContactUsPage/>}/>
           <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Router>

@@ -46,7 +46,6 @@ export default function TestimonialCarousel() {
     <section className="py-20 bg-white overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">What Our Customers Say</h2>
-
         <div className="relative w-full overflow-hidden">
           <motion.div
             className="flex gap-8"
@@ -55,7 +54,6 @@ export default function TestimonialCarousel() {
               repeat: Infinity,
               duration: 20,
               ease: "linear",
-              repeatType: "loop",
             }}
           >
             {[...testimonials, ...testimonials].map((user, idx) => (
