@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Car } from "lucide-react"
+import Logo from "../assets/DriveOn.png"
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
@@ -42,15 +42,17 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="bg-yellow-100 text-yellow-800 p-4 text-center font-bold">
-  ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
+        ⚠️ This is a demo project site. Do not enter real personal, payment, or sensitive information.
       </div>
       <Navbar />
       <main className="flex-1 flex items-center justify-center py-12">
         <div className="container mx-auto px-4">
           <Card className="max-w-md mx-auto">
             <CardHeader className="text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Car className="h-8 w-8 text-primary" />
+              <div className="mx-auto  w-50 h-16  flex items-center justify-center mb-4">
+                <Link to="/" className="flex items-center gap-2">
+                  <img src={Logo} alt="DriveOn Logo" />
+                </Link>
               </div>
               <CardTitle className="text-2xl">Welcome Back</CardTitle>
               <CardDescription>Sign in to your DriveOn account</CardDescription>
@@ -148,6 +150,13 @@ export default function LoginPage() {
                   Sign up
                 </Link>
               </div>
+              <div className="text-center text-sm">
+                Demo credentials:<br></br>
+                Admin : admin@driveon.com / 12345678 <br />
+                User  : user@driveon.com  / 12345678
+              </div>
+
+
             </CardFooter>
           </Card>
         </div>

@@ -9,6 +9,7 @@ import { Car } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
+import Logo from "../assets/DriveOn.png"
 
 export default function SignupPage() {
   const navigate = useNavigate()
@@ -64,8 +65,10 @@ export default function SignupPage() {
         <div className="container mx-auto px-4">
           <Card className="max-w-md mx-auto">
             <CardHeader className="text-center">
-              <div className="mx-auto bg-primary/10 w-16 h-16 rounded-full flex items-center justify-center mb-4">
-                <Car className="h-8 w-8 text-primary" />
+              <div className="mx-auto  w-50 h-16  flex items-center justify-center mb-4">
+                  <Link to="/" className="flex items-center gap-2">
+                      <img src={Logo} alt="DriveOn Logo" />
+                  </Link>
               </div>
               <CardTitle className="text-2xl">Create an Account</CardTitle>
               <CardDescription>Sign up to start renting vehicles with DriveOn</CardDescription>

@@ -64,6 +64,7 @@ const bookings = [
 export default function AdminDashboard() {
   const [vehiclesList, setVehiclesList] = useState(vehicles)
   const [bookingsList, setBookingsList] = useState(bookings)
+  const [profileImage, setProfileImage] = useState("/placeholder.svg")
   const [isAddVehicleOpen, setIsAddVehicleOpen] = useState(false)
   const [isUploading, setIsUploading] = useState(false)
   const [newVehicle, setNewVehicle] = useState({
@@ -74,6 +75,8 @@ export default function AdminDashboard() {
     transmission: "automatic",
     image: "",
   })
+  const [selectedBooking, setSelectedBooking] = useState(null)
+  const [isBookingDialogOpen, setIsBookingDialogOpen] = useState(false)
 
   const handleAddVehicle = () => {
     const vehicleToAdd = {
@@ -414,7 +417,14 @@ export default function AdminDashboard() {
                             </TableCell>
                             <TableCell>
                               <div className="flex space-x-2">
-                                <Button variant="outline" size="sm">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => {
+                                    setSelectedBooking(booking)
+                                    setIsBookingDialogOpen(true)
+                                  }}
+                                >
                                   View Details
                                 </Button>
                               </div>
@@ -424,6 +434,63 @@ export default function AdminDashboard() {
                       </TableBody>
                     </Table>
                   </div>
+                  {/* Booking Details Dialog */}
+                  <Dialog open={isBookingDialogOpen} onOpenChange={setIsBookingDialogOpen}>
+                    <DialogContent className="max-w-md">
+                      <DialogHeader>
+                        <DialogTitle>Booking Details</DialogTitle>
+                        <DialogDescription>
+                          Detailed information about the selected booking.
+                        </DialogDescription>
+                      </DialogHeader>
+                      {selectedBooking && (
+                        <div className="space-y-4">
+                          <div>
+                            <Label>Customer Name</Label>
+                            <div>{selectedBooking.user.name}</div>
+                          </div>
+                          <div>
+                            <Label>Email</Label>
+                            <div>{selectedBooking.user.email}</div>
+                          </div>
+                          <div>
+                            <Label>Phone</Label>
+                            <div>{selectedBooking.user.phone}</div>
+                          </div>
+                          <div>
+                            <Label>Vehicle</Label>
+                            <div className="flex items-center gap-2">
+                              <img
+                                src={selectedBooking.vehicle.image || "/placeholder.svg"}
+                                alt={selectedBooking.vehicle.name}
+                                className="h-8 w-12 object-cover rounded"
+                              />
+                              <span>{selectedBooking.vehicle.name}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <Label>Start Date</Label>
+                            <div>{selectedBooking.startDate}</div>
+                          </div>
+                          <div>
+                            <Label>End Date</Label>
+                            <div>{selectedBooking.endDate}</div>
+                          </div>
+                          <div>
+                            <Label>Status</Label>
+                            <Badge className={`capitalize ${getStatusColor(selectedBooking.status)}`}>
+                              {selectedBooking.status}
+                            </Badge>
+                          </div>
+                        </div>
+                      )}
+                      <DialogFooter>
+                        <Button variant="outline" onClick={() => setIsBookingDialogOpen(false)}>
+                          Close
+                        </Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </CardContent>
               </Card>
             </TabsContent>
