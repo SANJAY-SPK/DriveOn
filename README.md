@@ -1,12 +1,76 @@
-# React + Vite
+# DriveOn - Car Rental Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DriveOn is a modern car rental web application built with React, Tailwind CSS, and a modular component architecture.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Browse and filter vehicles by type, price, and more
+- User authentication (signup, login)
+- Book vehicles with date selection
+- View and manage bookings
+- Manage personal and payment information
+- Admin dashboard for vehicle and booking management
+- Responsive design for desktop and mobile
+- Demo only: **Do not enter real personal or payment information**
 
-## Expanding the ESLint configuration
+## Folder Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+driveon-frontend/
+├── public/                # Static assets
+├── src/
+│   ├── assets/            # Images and logos
+│   ├── components/        # Reusable UI and feature components
+│   │   ├── profile/       # User profile components
+│   │   │   └── tabs/      # Profile tab components
+│   │   ├── ui/            # UI primitives (Button, Card, Dialog, etc.)
+│   ├── data/              # Mock data (vehicles, etc.)
+│   ├── lib/               # Utility functions
+│   ├── pages/             # Page components (Home, Vehicles, Booking, etc.)
+│   ├── index.css          # Tailwind and global styles
+│   ├── App.jsx            # Main app entry
+│   └── ...
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
+```
+
+## Getting Started
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start the development server:**
+   ```bash
+   npm start
+   ```
+
+3. **Open in browser:**
+   ```
+   http://localhost:3000
+   ```
+
+## Demo Credentials
+
+- **Admin:** `admin@driveon.com` / `12345678`
+- **User:** `user@driveon.com` / `12345678`
+
+## Tech Stack
+
+- React
+- Tailwind CSS
+- React Router
+- Lucide Icons
+- date-fns
+
+## Notes
+
+- This project uses mock data and does not connect to a real backend. The backed of this project in development stage with spring boot.
+- For demonstration purposes only. **Do not use real personal or payment information.**
+
+## License
+
+MIT

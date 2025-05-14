@@ -85,7 +85,9 @@ export default function HomePage() {
 
           {/* Search Button (spans all 4 columns on small screens) */}
           <Button className="w-full bg-primary hover:bg-primary/90 text-white md:col-span-4">
-            Search Now
+            <Link to="/vehicles">
+                Search Cars 
+            </Link>
           </Button>
         </div>
       </div>
