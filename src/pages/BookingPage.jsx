@@ -251,7 +251,6 @@ export default function BookingPage() {
                                 mode="single"
                                 selected={dateRange.to}
                                 onSelect={(date) => setDateRange((prev) => ({ ...prev, to: date }))}
-                                disabled={(date) => date < dateRange.from}
                                 initialFocus
                               />
                             </PopoverContent>
